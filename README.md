@@ -54,7 +54,7 @@ source venv/bin/activate
 5. **Установить зависимости**
 
 ```shell
-pip install httpx==0.28.1 typer==0.27.2
+pip install httpx==0.28.1 typer==0.27.2 rich==15.0.0
 ```
 
 6. **Перейти в `src`**
