@@ -4,7 +4,7 @@ import httpx
 from httpx import AsyncClient
 from rich.progress import track
 
-from speed_tester.dto import TestResult, SpeedTestRequest, SpeedTestResponse
+from speed_tester.dto import RequestResult, SpeedTestRequest, SpeedTestResponse
 from speed_tester.utils import elapsed_ms
 
 
@@ -35,7 +35,7 @@ async def measure_speed(request: SpeedTestRequest) -> SpeedTestResponse:
     )
 
 
-async def run_one_test(client: AsyncClient, url: str) -> TestResult:
+async def run_one_test(client: AsyncClient, url: str) -> RequestResult:
     bytes_downloaded = 0
     start = time.perf_counter_ns()
 
@@ -46,31 +46,31 @@ async def run_one_test(client: AsyncClient, url: str) -> TestResult:
             async for chunk in response.aiter_raw():
                 bytes_downloaded += len(chunk)
 
-            return TestResult(
+            return RequestResult(
                 success=True,
                 bytes_downloaded=bytes_downloaded,
                 elapsed_ms=elapsed_ms(start),
             )
     except httpx.TimeoutException:
         elapsed = elapsed_ms(start)
-        return TestResult(
+        return RequestResult(
             success=False,
             bytes_downloaded=bytes_downloaded,
             elapsed_ms=elapsed,
             error=f"Timeout after {elapsed:.3f} ms",
         )
     except httpx.HTTPStatusError as e:
-        return TestResult(
+        return RequestResult(
             success=False,
             error=f"Request failed with status code {e.response.status_code}"
         )
     except httpx.RequestError as e:
-        return TestResult(
+        return RequestResult(
             success=False,
             error=f"RequestError: {e!r}"
         )
     except Exception as e:
-        return TestResult(
+        return RequestResult(
             success=False,
             error=f"Unexpected error: {e!r}"
         )

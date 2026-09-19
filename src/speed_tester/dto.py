@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True, slots=True)
-class TestResult:
+class RequestResult:
     success: bool
     bytes_downloaded: int = 0
     elapsed_ms: float = 0.0
@@ -18,8 +18,8 @@ class SpeedTestRequest:
 
 @dataclass(frozen=True, slots=True)
 class SpeedTestResponse:
-    success_results: list[TestResult]
-    failure_results: list[TestResult]
+    success_results: list[RequestResult]
+    failure_results: list[RequestResult]
     avg_request_time_ms: float
     bytes_downloaded: int
     speed_mb_per_s: float
