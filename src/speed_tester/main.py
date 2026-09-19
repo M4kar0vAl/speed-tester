@@ -28,7 +28,7 @@ def main(
 
     if not success_results:
         print("None of the requests are successful. Try again.")
-        return
+        raise typer.Exit(1)
 
     print(f"Average request time (ms): {response.avg_request_time_ms:.2f}")
     print(f"Total bytes downloaded: {response.bytes_downloaded}")
