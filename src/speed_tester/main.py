@@ -9,8 +9,8 @@ from speed_tester.measure_speed import measure_speed
 
 def main(
         url: Annotated[str, typer.Argument(help="The url to test the speed against")],
-        tries: Annotated[int, typer.Option(help="The number of requests to make.")] = 10,
-        timeout: Annotated[int, typer.Option(help="Timeout in seconds.")] = 30,
+        tries: Annotated[int, typer.Option(min=1, help="The number of requests to make.")] = 10,
+        timeout: Annotated[int, typer.Option(min=0, help="Timeout in seconds.")] = 30,
 ):
     request = SpeedTestRequest(url=url, tries=tries, timeout=timeout)
     response = asyncio.run(measure_speed(request))
