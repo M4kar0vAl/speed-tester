@@ -6,7 +6,10 @@ import typer
 from speed_tester.dto import SpeedTestRequest
 from speed_tester.measure_speed import measure_speed
 
+app = typer.Typer()
 
+
+@app.command()
 def main(
         url: Annotated[str, typer.Argument(help="The url to test the speed against")],
         tries: Annotated[int, typer.Option(min=1, help="The number of requests to make.")] = 10,
