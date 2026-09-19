@@ -13,7 +13,7 @@ class TestResult:
 class SpeedTestRequest:
     url: str
     tries: int = 10
-    timeout: int = 30
+    timeout: float | int = 30
 
 
 @dataclass(frozen=True, slots=True)
