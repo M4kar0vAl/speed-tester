@@ -73,3 +73,25 @@ python -m speed_tester <url>
 ```shell
 python -m speed_tester --help
 ```
+
+## Тесты
+
+### **Запустить тесты:**
+```shell
+uv run pytest
+```
+
+### **Если устанавливали зависимости через pip:**
+
+1. **Установить `pytest` и плагины:**
+
+```shell
+pip install pytest==9.1.1 pytest-asyncio==1.4.0
+```
+
+2. **Запустить тесты:**
+
+**Из корня репозитория:**
+```shell
+pytest
+```
