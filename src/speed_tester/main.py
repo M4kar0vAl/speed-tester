@@ -30,6 +30,6 @@ def main(
         print("None of the requests are successful. Try again.")
         raise typer.Exit(1)
 
-    print(f"Average request time (ms): {response.avg_request_time_ms:.2f}")
+    print(f"Average request time: {response.avg_request_time_ms:.2f} ms")
     print(f"Total bytes downloaded: {response.bytes_downloaded}")
-    print(f"Speed (Mb/s): {response.speed_mb_per_s:.2f}")
+    print(f"Speed: {response.speed_mb_per_s:.2f} MB/s")
