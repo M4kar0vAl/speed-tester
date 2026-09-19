@@ -2,6 +2,7 @@ import time
 
 import httpx
 from httpx import AsyncClient
+from rich.progress import track
 
 from speed_tester.dto import TestResult, SpeedTestRequest, SpeedTestResponse
 from speed_tester.utils import elapsed_ms
@@ -12,7 +13,7 @@ async def measure_speed(request: SpeedTestRequest) -> SpeedTestResponse:
     results = []
 
     async with AsyncClient(timeout=timeout_cfg, follow_redirects=True) as client:
-        for _ in range(request.tries):
+        for _ in track(range(request.tries), description="Making requests...", transient=True):
             results.append(await run_one_test(client, request.url))
 
     success_results = [res for res in results if res.success]
