@@ -1,5 +1,11 @@
 [project]
-name = "ad-robot-test-assignment"
+name = "speed_tester"
 version = "0.1.0"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "httpx>=0.28.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.25,<0.12"]
+build-backend = "uv_build"
